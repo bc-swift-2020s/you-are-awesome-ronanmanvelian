@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageNumber = 0
-    var messageNumber = 0
+    var imageNumber = -1
+    var messageNumber = -1
     let totalNumberOfImages = 9
     
     override func viewDidLoad() {
@@ -29,19 +29,19 @@ class ViewController: UIViewController {
                         "Fabulous? That's You!",
                         "You've Got The Design Skills Of Johnny Ive!"]
         
-        var newMessage = messages[Int.random(in: 0...messages.count-1)]
-        while messageLabel.text == newMessage {
-            print("*** We had a repeating value. Both newMessage and messageLabel.text = \(newMessage) and \(messageLabel.text!)")
-            newMessage = messages[Int.random(in: 0...messages.count-1)]
-        }
-        messageLabel.text = newMessage
+        var newMessageNumber: Int
+        repeat {
+            newMessageNumber = Int.random(in: 0...messages.count-1)
+        } while messageNumber == newMessageNumber
+        messageNumber = newMessageNumber
+        messageLabel.text = messages[messageNumber]
         
-        var newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        while imageView.image == newImage {
-            print("*** We had a repeating image #. Both newImage and messageLabel.text = \(newImage) and \(imageView.image)")
-            newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        }
-        imageView.image = newImage
+        var newImageNumber: Int
+        repeat {
+            newImageNumber = Int.random(in: 0...totalNumberOfImages)
+        } while imageNumber == newImageNumber
+        imageNumber = newImageNumber
+        imageView.image = UIImage(named: "image\(imageNumber)")
     }
     
 }
